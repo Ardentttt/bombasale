@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bombas Ale | Repuestos Automotor desde 1982</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rojo: #CC1F1F;
+    --azul: #1A3A6B;
+    --azul-claro: #2255A4;
+    --gris-oscuro: #111318;
+    --gris-medio: #1e2128;
+    --gris-card: #252830;
+    --texto: #f0f0f0;
+    --texto-suave: #a0a8b8;
+    --acento: #e8c84a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--gris-oscuro);
+    color: var(--texto);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(17,19,24,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--rojo);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .nav-logo img {
+    height: 38px; filter: drop-shadow(0 0 6px rgba(204,31,31,0.4));
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    color: var(--texto-suave); text-decoration: none;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--rojo); }
+  .nav-cta {
+    background: var(--rojo); color: white;
+    padding: 8px 20px; border-radius: 4px;
+    text-decoration: none; font-weight: 700; font-size: 14px;
+    letter-spacing: 0.5px; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: #a81818; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: 
+      linear-gradient(135deg, rgba(17,19,24,0.92) 0%, rgba(26,58,107,0.7) 50%, rgba(17,19,24,0.95) 100%),
+      url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=1600&q=80') center/cover;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 120px 5% 60px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 60px,
+      rgba(255,255,255,0.015) 60px, rgba(255,255,255,0.015) 61px
+    );
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(204,31,31,0.15); border: 1px solid rgba(204,31,31,0.4);
+    padding: 6px 16px; border-radius: 20px; margin-bottom: 24px;
+    width: fit-content;
+  }
+  .hero-badge span { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #e88a8a; }
+  .hero-badge::before { content: '●'; color: var(--rojo); font-size: 8px; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 10vw, 120px);
+    line-height: 0.9;
+    margin-bottom: 8px;
+    position: relative; z-index: 1;
+  }
+  .hero h1 .line1 { color: var(--texto); }
+  .hero h1 .line2 {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--rojo);
+    display: block;
+  }
+  .hero-sub {
+    font-size: 18px; color: var(--texto-suave);
+    max-width: 480px; margin: 20px 0 36px;
+    line-height: 1.6; position: relative; z-index: 1;
+  }
+  .hero-sub strong { color: var(--acento); }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; position: relative; z-index: 1; }
+  .btn-primary {
+    background: var(--rojo); color: white;
+    padding: 14px 32px; border-radius: 4px;
+    text-decoration: none; font-weight: 700; font-size: 16px;
+    display: flex; align-items: center; gap: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(204,31,31,0.4);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(204,31,31,0.5); }
+  .btn-secondary {
+    border: 2px solid rgba(255,255,255,0.2); color: var(--texto);
+    padding: 14px 32px; border-radius: 4px;
+    text-decoration: none; font-weight: 600; font-size: 16px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--azul-claro); background: rgba(34,85,164,0.2); }
+
+  .hero-stats {
+    display: flex; gap: 48px; margin-top: 60px; position: relative; z-index: 1;
+    border-top: 1px solid rgba(255,255,255,0.08); padding-top: 32px;
+  }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--rojo); line-height: 1;
+  }
+  .stat-label { font-size: 13px; color: var(--texto-suave); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+
+  /* STRIP */
+  .strip {
+    background: var(--rojo); padding: 14px 5%;
+    display: flex; gap: 40px; overflow: hidden;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .strip span::before { content: '✦  '; opacity: 0.7; }
+
+  /* SECCIONES */
+  section { padding: 80px 5%; }
+  .section-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--rojo); margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 6vw, 60px);
+    line-height: 1; margin-bottom: 16px;
+  }
+  .section-desc { color: var(--texto-suave); font-size: 17px; max-width: 520px; line-height: 1.7; margin-bottom: 48px; }
+
+  /* CATEGORÍAS */
+  #productos { background: var(--gris-medio); }
+  .cat-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px;
+  }
+  .cat-card {
+    background: var(--gris-card);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 8px; padding: 28px 20px;
+    text-align: center; transition: transform 0.2s, border-color 0.2s;
+    cursor: pointer;
+  }
+  .cat-card:hover { transform: translateY(-4px); border-color: var(--rojo); }
+  .cat-icon { font-size: 36px; margin-bottom: 12px; }
+  .cat-name { font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 700; letter-spacing: 0.5px; }
+  .cat-desc { font-size: 13px; color: var(--texto-suave); margin-top: 6px; line-height: 1.5; }
+
+  /* MARCAS */
+  #marcas { background: var(--gris-oscuro); }
+  .marcas-grid {
+    display: flex; flex-wrap: wrap; gap: 12px;
+  }
+  .marca-pill {
+    background: var(--gris-card); border: 1px solid rgba(255,255,255,0.08);
+    padding: 10px 22px; border-radius: 40px;
+    font-weight: 600; font-size: 14px; letter-spacing: 0.5px;
+    color: var(--texto-suave); transition: all 0.2s;
+  }
+  .marca-pill:hover { background: var(--azul); border-color: var(--azul-claro); color: white; }
+
+  /* FOTOS */
+  #fotos { background: var(--gris-medio); }
+  .fotos-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 240px 240px; gap: 12px;
+  }
+  .foto-card {
+    border-radius: 8px; overflow: hidden;
+    background: var(--gris-card);
+    position: relative;
+  }
+  .foto-card img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.85); transition: filter 0.3s, transform 0.3s; }
+  .foto-card:hover img { filter: brightness(1); transform: scale(1.04); }
+  .foto-card.grande { grid-row: span 2; }
+
+  /* ENVIOS */
+  .envios-banner {
+    background: linear-gradient(135deg, var(--azul) 0%, var(--azul-claro) 100%);
+    border-radius: 12px; padding: 48px 5%;
+    display: flex; align-items: center; justify-content: space-between; gap: 32px;
+    flex-wrap: wrap;
+  }
+  .envios-text h3 { font-family: 'Bebas Neue', sans-serif; font-size: 48px; margin-bottom: 8px; }
+  .envios-text p { font-size: 17px; color: rgba(255,255,255,0.8); }
+  .envios-features { display: flex; gap: 32px; flex-wrap: wrap; }
+  .envio-item { text-align: center; }
+  .envio-item .envio-icon { font-size: 32px; margin-bottom: 8px; }
+  .envio-item span { display: block; font-size: 13px; color: rgba(255,255,255,0.7); font-weight: 600; letter-spacing: 0.5px; }
+
+  /* CONTACTO */
+  #contacto { background: var(--gris-oscuro); }
+  .contacto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .info-item { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 28px; }
+  .info-icon {
+    width: 44px; height: 44px; border-radius: 8px;
+    background: rgba(204,31,31,0.15); border: 1px solid rgba(204,31,31,0.3);
+    display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0;
+  }
+  .info-label { font-size: 12px; color: var(--texto-suave); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .info-value { font-size: 16px; font-weight: 600; }
+  .info-value a { color: var(--texto); text-decoration: none; }
+  .info-value a:hover { color: var(--rojo); }
+
+  .wsp-btn {
+    display: flex; align-items: center; gap: 12px;
+    background: #25D366; color: white;
+    padding: 16px 28px; border-radius: 8px; width: fit-content;
+    text-decoration: none; font-weight: 700; font-size: 17px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.3);
+    margin-top: 8px;
+  }
+  .wsp-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(37,211,102,0.4); }
+  .wsp-icon { font-size: 24px; }
+
+  .horarios { background: var(--gris-card); border-radius: 10px; padding: 28px; }
+  .horarios h4 { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 20px; letter-spacing: 0.5px; }
+  .horario-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 15px; }
+  .horario-row:last-child { border-bottom: none; }
+  .horario-row .dia { color: var(--texto-suave); }
+  .horario-row .hora { font-weight: 600; }
+  .hora.abierto { color: #4ade80; }
+  .hora.cerrado { color: var(--texto-suave); }
+
+  /* FOOTER */
+  footer {
+    background: #0a0c0f; padding: 40px 5%;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: gap;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-logo { display: flex; align-items: center; gap: 12px; }
+  .footer-logo img { height: 32px; opacity: 0.8; }
+  .footer-copy { font-size: 13px; color: var(--texto-suave); }
+  .footer-redes { display: flex; gap: 12px; }
+  .red-btn {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: var(--gris-card); border: 1px solid rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: center; font-size: 16px;
+    text-decoration: none; transition: background 0.2s;
+  }
+  .red-btn:hover { background: var(--rojo); }
+
+  /* HAMBURGER MOBILE */
+  .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--texto); margin: 5px 0; transition: 0.3s; }
+
+  @media (max-width: 768px) {
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: block; }
+    .hero-stats { gap: 28px; flex-wrap: wrap; }
+    .fotos-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .foto-card.grande { grid-row: span 1; }
+    .contacto-grid { grid-template-columns: 1fr; }
+    .envios-banner { flex-direction: column; }
+  }
+
+  /* ANIMACIONES ENTRADA */
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img src="https://i.imgur.com/placeholder.png" alt="Bombas Ale" onerror="this.style.display='none'">
+    <span style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;">BOMBAS ALE</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#productos">Productos</a></li>
+    <li><a href="#marcas">Marcas</a></li>
+    <li><a href="#fotos">Local</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="https://wa.me/5491146546565" class="nav-cta" target="_blank">💬 WhatsApp</a>
+  <button class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge"><span>Fábrica propia · Desde 1982</span></div>
+  <h1>
+    <span class="line1">REPUESTOS</span>
+    <span class="line2">AUTOMOTOR</span>
+  </h1>
+  <p class="hero-sub">
+    Distribución, refrigeración, encendido, correas y mucho más. 
+    <strong>Todo para tu auto</strong>, con más de 40 años de experiencia en Caseros.
+  </p>
+  <div class="hero-btns">
+    <a href="https://wa.me/5491146546565" class="btn-primary" target="_blank">
+      💬 Consultar por WhatsApp
+    </a>
+    <a href="#productos" class="btn-secondary">Ver productos →</a>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">40+</div>
+      <div class="stat-label">Años de experiencia</div>
+    </div>
+    <div>
+      <div class="stat-num">300+</div>
+      <div class="stat-label">Reseñas 5 estrellas</div>
+    </div>
+    <div>
+      <div class="stat-num">∞</div>
+      <div class="stat-label">Envíos a todo el país</div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <span>Distribución</span>
+  <span>Refrigeración</span>
+  <span>Encendido</span>
+  <span>Correas</span>
+  <span>Filtros</span>
+  <span>Aceites</span>
+  <span>Bobinas</span>
+  <span>Limpiamotores</span>
+  <span>Envíos a todo el país</span>
+  <span>Fábrica propia</span>
+</div>
+
+<!-- PRODUCTOS -->
+<section id="productos">
+  <div class="section-tag">Nuestros Rubros</div>
+  <h2 class="section-title">TODO PARA TU AUTO</h2>
+  <p class="section-desc">Contamos con stock permanente de las principales categorías de repuestos y accesorios automotores multimarca.</p>
+  <div class="cat-grid fade-in">
+    <div class="cat-card"><div class="cat-icon">🔧</div><div class="cat-name">Distribución</div><div class="cat-desc">Cadenas, correas, tensores y más</div></div>
+    <div class="cat-card"><div class="cat-icon">🌡️</div><div class="cat-name">Refrigeración</div><div class="cat-desc">Radiadores, bombas de agua, termostatos</div></div>
+    <div class="cat-card"><div class="cat-icon">⚡</div><div class="cat-name">Encendido</div><div class="cat-desc">Bobinas, cables, bujías, distribuidores</div></div>
+    <div class="cat-card"><div class="cat-icon">⚙️</div><div class="cat-name">Correas</div><div class="cat-desc">Correas de accesorios y distribución</div></div>
+    <div class="cat-card"><div class="cat-icon">🛢️</div><div class="cat-name">Aceites</div><div class="cat-desc">Motul, Total, Valvoline, Gulf, Petronas</div></div>
+    <div class="cat-card"><div class="cat-icon">🔩</div><div class="cat-name">Filtros</div><div class="cat-desc">Kits de filtros multimarca</div></div>
+    <div class="cat-card"><div class="cat-icon">🧴</div><div class="cat-name">Limpiamotores</div><div class="cat-desc">Motor limpio, rendimiento al máximo</div></div>
+    <div class="cat-card"><div class="cat-icon">🚗</div><div class="cat-name">Multimarca</div><div class="cat-desc">Cubrimos todas las marcas del mercado</div></div>
+  </div>
+</section>
+
+<!-- MARCAS -->
+<section id="marcas">
+  <div class="section-tag">Marcas que trabajamos</div>
+  <h2 class="section-title">LAS MEJORES MARCAS</h2>
+  <p class="section-desc">Trabajamos con los fabricantes líderes del mercado para garantizar calidad y confiabilidad en cada repuesto.</p>
+  <div class="marcas-grid fade-in">
+    <div class="marca-pill">Motul</div>
+    <div class="marca-pill">Total</div>
+    <div class="marca-pill">Valvoline</div>
+    <div class="marca-pill">Gulf</div>
+    <div class="marca-pill">Petronas</div>
+    <div class="marca-pill">Mobil</div>
+    <div class="marca-pill">ACDelco</div>
+    <div class="marca-pill">YPF Elaion</div>
+    <div class="marca-pill">Bosch</div>
+    <div class="marca-pill">NGK</div>
+    <div class="marca-pill">Gates</div>
+    <div class="marca-pill">SKF</div>
+    <div class="marca-pill">Dayco</div>
+    <div class="marca-pill">Eurorepar</div>
+    <div class="marca-pill">+ muchas más</div>
+  </div>
+</section>
+
+<!-- FOTOS -->
+<section id="fotos">
+  <div class="section-tag">Nuestro Local</div>
+  <h2 class="section-title">VISITANOS EN CASEROS</h2>
+  <p class="section-desc">Un local con más de 40 años en el mismo lugar, con amplio stock y atención personalizada.</p>
+  <div class="fotos-grid fade-in">
+    <div class="foto-card grande">
+      <img src="https://lh3.googleusercontent.com/p/AF1QipON9-MTy-V06znSzd156c5vIEd_YHvTpec1o63V=w800-h600-k-no" alt="Local Bombas Ale" onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80'">
+    </div>
+    <div class="foto-card">
+      <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=500&q=80" alt="Repuestos">
+    </div>
+    <div class="foto-card">
+      <img src="https://images.unsplash.com/photo-1632823471565-1ecdf5c6da12?w=500&q=80" alt="Aceites">
+    </div>
+    <div class="foto-card">
+      <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=500&q=80" alt="Motor">
+    </div>
+    <div class="foto-card">
+      <img src="https://images.unsplash.com/photo-1609692814859-2b9a0c2ab60d?w=500&q=80" alt="Taller">
+    </div>
+  </div>
+</section>
+
+<!-- ENVIOS -->
+<section style="padding: 40px 5%;">
+  <div class="envios-banner fade-in">
+    <div class="envios-text">
+      <h3>ENVIAMOS A TODO EL PAÍS 📦</h3>
+      <p>Hacemos despachos por correo y transporte a cualquier punto de la Argentina.</p>
+    </div>
+    <div class="envios-features">
+      <div class="envio-item"><div class="envio-icon">📦</div><span>Correo Argentino</span></div>
+      <div class="envio-item"><div class="envio-icon">🚚</div><span>Transportes</span></div>
+      <div class="envio-item"><div class="envio-icon">💬</div><span>Coordiná por WhatsApp</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="section-tag">Contacto</div>
+  <h2 class="section-title">ENCONTRANOS</h2>
+  <div class="contacto-grid">
+    <div>
+      <div class="info-item fade-in">
+        <div class="info-icon">📍</div>
+        <div>
+          <div class="info-label">Dirección</div>
+          <div class="info-value">San Jorge 4560, Caseros<br>Buenos Aires, B1678</div>
+        </div>
+      </div>
+      <div class="info-item fade-in">
+        <div class="info-icon">📞</div>
+        <div>
+          <div class="info-label">Teléfono</div>
+          <div class="info-value"><a href="tel:01146546565">011 4654-6565</a></div>
+        </div>
+      </div>
+      <div class="info-item fade-in">
+        <div class="info-icon">📸</div>
+        <div>
+          <div class="info-label">Instagram</div>
+          <div class="info-value"><a href="https://instagram.com/bombas_ale" target="_blank">@bombas_ale</a></div>
+        </div>
+      </div>
+      <a href="https://wa.me/5491146546565" class="wsp-btn fade-in" target="_blank">
+        <span class="wsp-icon">💬</span> Escribinos por WhatsApp
+      </a>
+    </div>
+    <div class="horarios fade-in">
+      <h4>🕐 Horarios de Atención</h4>
+      <div class="horario-row"><span class="dia">Lunes a Viernes</span><span class="hora abierto">8:00 – 18:00</span></div>
+      <div class="horario-row"><span class="dia">Sábados</span><span class="hora abierto">8:00 – 13:00</span></div>
+      <div class="horario-row"><span class="dia">Domingos</span><span class="hora cerrado">Cerrado</span></div>
+      <div style="margin-top:20px;padding:16px;background:rgba(204,31,31,0.1);border-radius:8px;border-left:3px solid var(--rojo);">
+        <p style="font-size:14px;color:var(--texto-suave);line-height:1.6;">
+          ⭐ <strong style="color:var(--texto)">4.8 estrellas</strong> en Google Maps con más de <strong style="color:var(--texto)">300 reseñas</strong> de clientes satisfechos.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <span style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;opacity:0.7;">BOMBAS ALE</span>
+    <span style="font-size:12px;color:var(--texto-suave);">Desde 1982</span>
+  </div>
+  <div class="footer-copy" style="font-size:13px;color:var(--texto-suave);">© 2025 Bombas Ale · San Jorge 4560, Caseros</div>
+  <div class="footer-redes">
+    <a href="https://instagram.com/bombas_ale" class="red-btn" target="_blank">📸</a>
+    <a href="https://wa.me/5491146546565" class="red-btn" target="_blank">💬</a>
+    <a href="tel:01146546565" class="red-btn">📞</a>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOTANTE -->
+<a href="https://wa.me/5491146546565" target="_blank" style="
+  position:fixed; bottom:24px; right:24px; z-index:200;
+  width:56px; height:56px; border-radius:50%;
+  background:#25D366; display:flex; align-items:center; justify-content:center;
+  font-size:28px; box-shadow:0 4px 20px rgba(37,211,102,0.5);
+  text-decoration:none; transition:transform 0.2s;
+" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">💬</a>
+
+<script>
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  function toggleMenu() {
+    const links = document.querySelector('.nav-links');
+    if(links) links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+  }
+</script>
+</body>
+</html>
